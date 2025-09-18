@@ -17,7 +17,7 @@ jobs:
                 src: github/AnyFork
                 # 支持Gitee, Github, Gitlab and Gitcode
                 dst: gitee/AnyFork
-                dst_key: ${{ secrets.GITEE_PRIVATE_KEY }}
+                dst_key: ${{ secrets.GITEE_RSA_PRIVATE_KEY }}
                 dst_token: ${{ secrets.GITEE_TOKEN }}
                 # 支持Github/Gitee/Gitcode的用户、组织以及Gitlab的组
                 account_type: user
