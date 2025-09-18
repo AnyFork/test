@@ -1,0 +1,27 @@
+name: Sync to Gitee
+
+on:
+    push:
+        branches:
+            # 或者你想要同步的分支
+            - main
+
+jobs:
+    sync:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Mirror the Github organization repos to Gitee.
+              uses: Yikun/hub-mirror-action@master
+              with:
+                # 支持Gitee, Github, Gitlab and Gitcode
+                src: github/AnyFork
+                # 支持Gitee, Github, Gitlab and Gitcode
+                dst: gitee/AnyFork
+                dst_key: ${{ secrets.GITEE_PRIVATE_KEY }}
+                dst_token: ${{ secrets.GITEE_TOKEN }}
+                # 支持Github/Gitee/Gitcode的用户、组织以及Gitlab的组
+                account_type: user
+                clone_style: "ssh"
+                force_update: true
+                static_list: "test"
+                mappings: "test=>test111"
