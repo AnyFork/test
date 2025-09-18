@@ -4,7 +4,7 @@ on:
     push:
         branches:
             # 或者你想要同步的分支
-            - main
+            - master
 
 jobs:
     sync:
