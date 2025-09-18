@@ -1,27 +1,22 @@
 name: Sync to Gitee
 
 on:
-    push:
-        branches:
-            # 或者你想要同步的分支
-            - master
+  schedule:
+    - cron: '0 * * * *'
 
 jobs:
     sync:
         runs-on: ubuntu-latest
         steps:
-            - name: Mirror the Github organization repos to Gitee.
-              uses: Yikun/hub-mirror-action@master
+            - name: Sync to Gitee
+              uses: wearerequired/git-mirror-action@master
+              env:
+                  # 注意在 Settings->Secrets 配置 GITEE_RSA_PRIVATE_KEY
+                  SSH_PRIVATE_KEY: ${{ secrets.GITEE_RSA_PRIVATE_KEY }}
               with:
-                # 支持Gitee, Github, Gitlab and Gitcode
-                src: github/AnyFork
-                # 支持Gitee, Github, Gitlab and Gitcode
-                dst: gitee/AnyFork
-                dst_key: ${{ secrets.GITEE_RSA_PRIVATE_KEY }}
-                dst_token: ${{ secrets.GITEE_TOKEN }}
-                # 支持Github/Gitee/Gitcode的用户、组织以及Gitlab的组
-                account_type: user
-                clone_style: "ssh"
-                force_update: true
-                static_list: "test"
-                mappings: "test=>test111"
+                  # 注意替换为你的 GitHub 源仓库地址
+                  source-repo: git@github.com:AnyFork/test.git
+                  # 注意替换为你的 Gitee 目标仓库地址
+                  destination-repo: git@gitee.com:AnyFork/test111.git
+
+              
